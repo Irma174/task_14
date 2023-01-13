@@ -19,39 +19,62 @@
                 $dateEntrySite = $_COOKIE['timeEntrySite'];
                 $dateEntrySiteFormat = date('m.d.Y H:i:s', $dateEntrySite);
                 $result = $dateEntrySite - $dateRegistr;
-                $deadLine = $dateEntrySite + 86400;
+                $deadLine = (($dateRegistr + 86400)*1000);
                 $deadLineDate = date('m.d.Y H:i:s', $deadLine);
 
                 if($result < 86400):
                
                 ?>
 
-                <p>В первые сутки после регистрации дарим скидку 25%. <br>
+                <p>В первые сутки после регистрации дарим скидку 10%. <br>
                 До конца акции осталось: </p>
 
-            <?php echo "<script>let deadline = $deadLineDate</script>";?>
+            <?php echo "<script>let deadline = $deadLine</script>";?>
 
-            <div class="timer">
+            <div id="timer">
                 <div class="timer__items">
-                    <div class="timer__item timer__days">00</div>
-                    <div class="timer__item timer__hours">00</div>
-                    <div class="timer__item timer__minutes">00</div>
-                    <div class="timer__item timer__seconds">00</div>
+                    <div class="days timer__item">00</div>
+                    <div class="hours timer__item">00</div>
+                    <div class="minutes timer__item">00</div>
+                    <div class="seconds timer__item">00</div>
                 </div>
-            </div>
-
-            <script type="text/javascript" src="script.js"></script>
-            
+            </div>                        
         <?php endif; ?> 
         <?php endif; ?> 
         
-        <a href="#individual" class="birthday_data"> Получить индивидуальное предложение</a>
+        <a href="#" class="birthday_data birthday"> Получить индивидуальное предложение</a>
+
+        <script>
+                const linkPromotion = document.querySelector('.birthday_data');
+                function promtEnter(){   
+                    
+                    const birthday = prompt('Чтобы получать индивидуальные предложения укажите дату вашего рождения. Пишите в формате ДД.ММ.ГГГГ: ');
+                    let text = birthday.split('.');
+                    let day = text[0];
+                    let month = text[1];
+                    let years = text[2];
+                    let birthdayDay = new Date("'"+ month + '.' + day + '.' + years+"'");
+                    let today = new Date();
+                    let birthdayDayNumber = birthdayDay.getDate();
+                    let birthdayMonthNumber = birthdayDay.getMonth();
+                    let todayDay = today.getDate();
+                    let todayMonth = today.getMonth();
+                    if ((todayMonth == birthdayMonthNumber)&&(todayDay==birthdayDayNumber)){
+                        linkPromotion.textContent = `Поздравляем с днем рождения! Дарим скидку 5% на все услуги салона. Скидка действует в течение недели после дня рождения!`;
+                    }else {
+                        linkPromotion.textContent = 'Индивидуальное предложение можно получить за неделю до и неделю после дня рождения!';
+                    }               
+                    event.preventDefault();
+                }
+                linkPromotion.addEventListener('click', promtEnter);
+        </script>
+           
 		<div class="div_p2">
 		    <p>Сеть спа-студий Play Day  - это все оттенки красивой жизни 
 		    	в одном месте, это именно то место, куда Вы мечтали попасть! Любовь 
 		    	и доброта к нашим клиентам, профессиональный подход и заботливые    руки мастеров, поднимут Ваше настроение 
 				и воплотят все Ваши мечты в реальность.</p>
-		</div>
+		</div>    
     </div>
 </div>
 <div class="container3">
@@ -96,7 +119,8 @@
             <div class="div-img">
                 <img src=".\images\premium.jpg" alt="">
             </div>
-                <a href='offer.php' class="green_button">Перейти</a>                
+                <a href='#' class="green_button">Перейти</a>                
         </div>
     </div>
 </div>
+<script type="text/javascript" src="script.js"></script>

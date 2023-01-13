@@ -239,7 +239,7 @@ p{
 .timer__items {
     display: flex;
     font-size: 48px;
-    margin-left: 550px;
+    justify-content: center;
   }
 .timer__item {
     position: relative;
@@ -254,9 +254,13 @@ p{
     bottom: 0;
     transform: translateX(-50%);
     font-size: 14px;
-}
+  }
+
 .timer__item:not(:last-child)::after {
     content: ':';
     position: absolute;
     right: -15px;
+}
+.container2_hello a{
+    color: crimson;
 }
